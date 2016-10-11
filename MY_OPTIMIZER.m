@@ -9,7 +9,7 @@ function xbest = MY_OPTIMIZER(FUN, DIM, ftarget, maxfunevals)
   fbest = inf;
   for iter = 1:ceil(maxfunevals/popsize)
     xpop = 10 * rand(DIM, popsize) - 5;      % new solutions
-    [fvalues, idx] = sort(feval(FUN, xpop)); % evaluate
+    %[fvalues, idx] = sort(feval(FUN, xpop)); % evaluate
     if fbest > fvalues(1)                    % keep best
       fbest = fvalues(1);
       xbest = xpop(:,1);
