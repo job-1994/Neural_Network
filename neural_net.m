@@ -5,7 +5,7 @@ clc
 
 %Set the input values and number of individuals in the population
 in = [2; 3];
-pop = 5;
+pop = 10;
 
 % Generate a population of size "pop", using the populate function
 population = populate(pop);
@@ -14,8 +14,10 @@ population = populate(pop);
 weights = cell(pop,4);
 neuron = weights;
 
-% Generate an array to store the output value for every individual
+% Generate arrays to store the output value for every individual and it's
+% fitness
 outputs = zeros(1, pop);
+fitness = outputs;
 
 %{ 
 Here's where it get complicated fam. 
@@ -37,9 +39,10 @@ for n = 1:pop
         if i == 1
             neuron{n, i} = tanh(weights{n, i}*in);
         else
-            neuron{n, i} = tanh(weights{n, i}*neuron{n, i-1})            
+            neuron{n, i} = tanh(weights{n, i}*neuron{n, i-1});            
             if i == 4
                 outputs(n) = neuron{n, i}
+                fitness(n) = fitness_func(outputs(n))
             end            
         end
     end

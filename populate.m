@@ -4,5 +4,5 @@
 
 function p = populate(N)
     r1 = -1 + (1+1)*rand(14,N);
-    p = transpose(r1);
+	p = transpose(r1);
 end
