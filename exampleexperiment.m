@@ -3,8 +3,8 @@
 % must be in the path of Matlab/Octave
 % CAPITALIZATION indicates code adaptations to be made
 
-addpath('C:\Users\Helmi\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
-datapath = 'C:\Users\Helmi\Google Drive\Bio-inspired\Data\Test 1';  % different folder for each experiment
+addpath('C:\Users\Job\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
+datapath = 'C:\Users\Job\Documents\GitHub\Data';  % different folder for each experiment
 % opt.inputFormat = 'row';
 opt.algName = 'Test 1';
 opt.comments = 'Test run of everything straight out of the box with 2, 3, 5 dimensions';

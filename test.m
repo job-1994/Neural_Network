@@ -1,16 +1,13 @@
 clear
 clc
 
-%Set the input values and number of individuals in the population
-in = [2; 3];
-pop = 1;
-
-% Generate a population of size "pop", using the populate function
-population = populate(pop);
-
-% Get the weights from the population
-weights = get_weights(population);
-
-for n = 1:pop
-    output = neural_net_function(weights(pop, :), in)
-end
+input = [303 202];
+weight_in = [0.89 0.1; 1 3];
+weight_1 = [0.1 0.6; 1 5];
+weight_out = [0.1 0.1; 0.1 0.1];
+Weights = cell(1,3);
+Weights{1,1} = weight_in;
+Weights{1,2} = weight_1;
+Weights{1,3} = weight_out;
+out = neural_net_function(Weights, input)
+fitness_value = sort(feval('fgeneric', transpose([0.005 0.0005])))
