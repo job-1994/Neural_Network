@@ -1,18 +1,17 @@
 function p = encode(weights, dim)
     chromosome_length = size(weights,2);
     input_length = chromosome_length - (4 + 2*dim);
-    output_length = chromosome_length - (4 + 2*dim);
     popsize = size(weights,1);
     p = cell(popsize, 3);
     
-    layer_input = zeros(2,input_length/2);
+    layer_input = zeros(2,dim);
     layer_1 = zeros(2,2);
-    layer_2 =  zeros(2,input_length/2);
+    layer_2 =  zeros(2,dim);
     
     for i = 1:popsize
         for j = 1:dim
             layer_input(1, j) = weights(i, j);
-            layer_input(2, j) = weights(i, (input_length/2) + j);
+            layer_input(2, j) = weights(i, (dim) + j);
         end
         
         layer_1(1,1) = weights(i, input_length + 1);
