@@ -1,5 +1,5 @@
 clc
 clear
 
-weights = populate(4,50)
+weights = populate(4,2)
 encoded_weights = encode(weights)
