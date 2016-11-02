@@ -1,0 +1,27 @@
+function p = encode(weights)
+    chromosome_length = size(weights,2);
+    input_length = chromosome_length - 6;
+    popsize = size(weights,1);
+    p = cell(popsize, 3);
+    
+    layer_input = zeros(2,input_length/2);
+    layer_1 = zeros(2,2);
+    layer_2 = zeros(1,2);
+    
+    for i = 1:popsize
+        for j = 1:(input_length/2)
+            layer_input(1, j) = weights(popsize, j);
+            layer_input(2, j) = weights(popsize, j);
+        end
+        for k = 1:4
+            layer_1(popsize,k) = weights(popsize, input_length + k);
+        end
+        
+        layer_2(1,1) = weights(popsize, input_length + 5);
+        layer_2(1,2) = weights(popsize, input_length + 6);
+        
+        p{i,1} = layer_input;
+        p{i,2} = layer_1;
+        p{i,3} = layer_2;
+    end
+end

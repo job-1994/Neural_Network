@@ -1,0 +1,2 @@
+weights = populate(4,3)
+encoded_weights = encode(weights)
