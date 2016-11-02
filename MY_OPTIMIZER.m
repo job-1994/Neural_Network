@@ -7,13 +7,18 @@ function xbest = MY_OPTIMIZER(FUN, DIM, ftarget, maxfunevals)
   maxfunevals = min(1e8 * DIM, maxfunevals); 
   popsize = min(maxfunevals, 200);
   fbest = inf;
-  ftarget
-  in = [0.1 -1];
+  in = -5 + (10+10)*rand(1,DIM);
 for iter=1:10
-    weights = populate(4,2);
-    encoded_weights = encode(weights);
+    weights = populate(4,DIM);
+    encoded_weights = encode(weights, DIM);
     neural_out = neural_net_function(encoded_weights, in);
-    fitness_value = feval(FUN, transpose(neural_out))
+    fitness_value = feval(FUN, transpose(neural_out));
+    if fbest > fitness_value
+        fbest = fitness_value;
+    end
+    if feval(FUN, 'fbest') < ftarget         % COCO-task achieved
+      break;                                 % (works also for noisy functions)
+    end
 end
 
 %  for iter = 1:ceil(maxfunevals/popsize)

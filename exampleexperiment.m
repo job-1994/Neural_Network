@@ -6,7 +6,7 @@ clear
 clc
 
 addpath('C:\Users\Job\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
-datapath = 'C:\Users\Job\Documents\GitHub\Data';  % different folder for each experiment
+datapath = 'C:\Users\Job\Desktop\Data';  % different folder for each experiment
 % opt.inputFormat = 'row';
 opt.algName = 'Test 1';
 opt.comments = 'Test run of everything straight out of the box with 2, 3, 5 dimensions';
@@ -16,7 +16,7 @@ minfunevals = 'dim + 2';  % PUT MINIMAL SENSIBLE NUMBER OF EVALUATIONS for a res
 maxrestarts = 1e4;        % SET to zero for an entirely deterministic algorithm
 
 %dimensions = [2, 3, 5, 20, 40];  % small dimensions first, for CPU reasons
-dimensions = [2];  % small dimensions first, for CPU reasons
+dimensions = [2, 3, 4];  % small dimensions first, for CPU reasons
 functions = benchmarks('FunctionIndices');  % or benchmarksnoisy(...)
 instances = [1:5, 41:50];  % 15 function instances
 
