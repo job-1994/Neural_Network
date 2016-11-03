@@ -7,7 +7,23 @@ function xbest = MY_OPTIMIZER(FUN, DIM, ftarget, maxfunevals)
   maxfunevals = min(1e8 * DIM, maxfunevals); 
   popsize = min(maxfunevals, 200);
   fbest = inf;
+  
+  lower_lim = -10;
+  upper_lim = 10;
+  n_pairs = 20;
+  interval = (abs(lower_lim) + abs(upper_lim))/n_pairs;
+
+
+  
+  
+  
+  
+  
+  
+  
+  
   in = -5 + (10+10)*rand(1,DIM);
+  
 for iter=1:10
     weights = populate(popsize,DIM);
     encoded_weights = encode(weights, DIM);
