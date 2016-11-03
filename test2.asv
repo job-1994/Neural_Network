@@ -9,4 +9,9 @@ clear
 % i = weights(1,:)
 % mutate(weights(1,:),0.1)
 
-test = get_test_pairs(51)
+for i = 1:20
+    for j = 1:2
+        if(j ~= 3)
+            my_array(i,j) = i;
+    end
+end
