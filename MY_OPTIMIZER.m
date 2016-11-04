@@ -11,7 +11,7 @@ function xbest = MY_OPTIMIZER(FUN, DIM, ftarget, maxfunevals)
 pairs = get_test_pairs(NPairs, DIM, FUN);
 
 %Train MLP
-
+weight_best = Genetic_Algorithm(pairs, NPairs, DIM);
 
 %Input random values into FUN and MLP, to determine MLP accuracy
   

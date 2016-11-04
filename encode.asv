@@ -6,7 +6,7 @@ function p = encode(weights)
     
     layer_input = zeros(2,input_length/2);
     layer_1 = zeros(2,2);
-    layer_2 = zeros(1,2);
+    layer_2 = zeros(2,2);
     
     for i = 1:popsize
         for j = 1:(input_length/2)
