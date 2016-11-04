@@ -1,4 +1,3 @@
-
 function pairs = get_test_pairs(n_pairs, DIM, FUN)
     inputs = cell(1,n_pairs);
     outputs = zeros(1,n_pairs);

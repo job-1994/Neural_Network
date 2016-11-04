@@ -6,8 +6,16 @@ function xbest = MY_OPTIMIZER(FUN, DIM, ftarget, maxfunevals)
 
   maxfunevals = min(1e8 * DIM, maxfunevals); 
   popsize = min(maxfunevals, 200);
-  fbest = inf;
-  in = -5 + (10+10)*rand(1,DIM);
+  NPairs = 10;
+%Get random FUN Input/Output pairs for MLP training
+pairs = get_test_pairs(NPairs, DIM, FUN);
+
+%Train MLP
+weight_best = Genetic_Algorithm(pairs, NPairs, DIM);
+
+%Input random values into FUN and MLP, to determine MLP accuracy
+  
+   
 for iter=1:10
     weights = populate(popsize,DIM);
     encoded_weights = encode(weights, DIM);
