@@ -35,6 +35,5 @@ function c = crossover(parent_1, parent_2)
             child(1,i) = parent_2(1,i);   
         end
     end
-    
     c = child;
 end

@@ -1,7 +1,7 @@
 % Selects k parents to fight for the right to reproduce
 
 function next_generation = tournament(fitness_array, pop, k_parents, popsize)
-    next_generation = zeros(1, popsize);
+    next_generation = zeros(popsize, size(pop,2));
     for idx = 1 : popsize
         select = randperm(popsize, k_parents);
     
@@ -28,7 +28,7 @@ function next_generation = tournament(fitness_array, pop, k_parents, popsize)
     
         parent1 = pop(find(fitness_array==f_parent1),:);
         parent2 = pop(find(fitness_array==f_parent2),:);
-        
-        next_generation(1, idx) = child;
+        child = crossover(parent1, parent2);
+        next_generation(idx, :) = child(1,:);
     end
 end
