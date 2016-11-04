@@ -1,6 +1,6 @@
 
 function Output = neural_net_function(input, Weights)
-    
+    input = transpose(input);
     weight_input_layer = transpose(Weights{1,1});
     weight_1st_layer = transpose(Weights{1,2});
     weight_output_layer = transpose(Weights{1,3});
