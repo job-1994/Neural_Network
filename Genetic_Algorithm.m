@@ -9,7 +9,7 @@ mutate_rate = 0.1;
 pop = populate(popsize, DIM);
 weights = encode(pop);
 
-generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs, nLayers);
+generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs);
 
 %produce next generation through tournament selection using crossover
 next_generation = tournament(generation_fitness, pop, k_parents, popsize);
@@ -17,15 +17,15 @@ next_generation = mutate(next_generation, mutate_rate);
 
 for generations = 1 : lim_generations
     weights = encode(next_generation);
-    generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs, nLayers);
+    generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs);
     next_generation = tournament(generation_fitness, pop, k_parents, popsize);
     next_generation = mutate(next_generation, mutate_rate);
-    display(generations);
+    generations
 end
 
 fbest = inf;
 final_generation = next_generation;
-final_generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs, nLayers);
+final_generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs)
 for i = 1 : popsize
     if(final_generation_fitness(1,i) < fbest)
        fbest =  final_generation_fitness(1,i);

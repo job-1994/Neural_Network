@@ -1,10 +1,12 @@
 function Output = neural_net_function(input, Weights, nLayers)
     layer_output = transpose(input);
     
-    layer_1_output = tanh(input * weight_input_layer);
-    layer_2_output = tanh(layer_1_output * weight_1st_layer);
-    Output = tanh(layer_2_output * weight_output_layer);
-    Output = 100*(Output+1);
+    for layer = 1: nLayers
+        weight_layer = transpose(Weights{1,layer});
+        layer_output = atan(layer_output * weight_layer);
+    end
+    
+    Output = 100*(abs(layer_output));
 
     %{
     layer_1_output = atan(input * weight_input_layer);
