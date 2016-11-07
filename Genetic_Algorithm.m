@@ -1,12 +1,12 @@
 function weights_best = GA(io_pairs, n_pairs, DIM)
 
-popsize = 2;
+popsize = 200;
 lim_generations = 100;
-k_parents = 5;
+k_parents = 25;
 mutate_rate = 1/popsize;
-nHiddenLayers = 3;
-nNeurons = 2; 
-%encode(weights, nHiddenLayers, neurons, dimensions)
+nHiddenLayers = 4;
+nNeurons = 25; 
+
 %create initial generation
 pop = populate(popsize, DIM, nHiddenLayers, nNeurons);
 weights = encode(pop, nHiddenLayers, nNeurons, DIM);
@@ -33,7 +33,7 @@ for generations = 1 : lim_generations
         if(generation_fitness(1,i) < fbest)
             fbest =  generation_fitness(1,i);
             idx = find(generation_fitness == fbest);
-            weights_best = {weights{idx, 1} weights{idx, 2} weights{idx, 3}};
+            weights_best = {weights{idx, 1} weights{idx, 2} weights{idx, 3} weights{idx, 4}};
         end
     end
 
@@ -48,7 +48,7 @@ end
        input =  io_pairs {1}{j};
        f_desired(1,j) = io_pairs{2}(1, j);
        f_nn(1,j) = neural_net_function(input, weights_best, nHiddenLayers);
-       error(1,j) = f_desired(1,j) - f_nn(1,j);
+       error(1,j) = ((f_desired(1,j) - f_nn(1,j))/f_desired(1,j))*100;
     end
 
 end

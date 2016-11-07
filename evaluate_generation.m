@@ -2,7 +2,7 @@ function f_array = evaluate_generation(pop_size, weights, n_pairs, io_pairs, nHi
 
 f_array = zeros(1, pop_size);
 for i = 1: pop_size
-    weight = {weights{i, 1} weights{i, 2} weights{i, 3}};
+    weight = {weights{i, 1} weights{i, 2} weights{i, 3} weights{i, 4}};
     f_total = 0;
     for j = 1 : n_pairs
        input =  io_pairs {1}{j};

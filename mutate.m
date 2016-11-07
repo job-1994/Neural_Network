@@ -7,7 +7,12 @@ function m = mutate(pop, rate)
         choose = rand;
         if(choose < rate)
             choose_gene = round(1+rand*(genes-1));
-            copy(i, choose_gene) = -1 + (2)*rand;
+            if choose_gene == genes
+                copy(i, choose_gene) = -1e6 + (2e6)*rand;
+            end
+            if choose_gene ~= genes
+                copy(i, choose_gene) = -1 + (2)*rand;
+            end
         end
     end
     

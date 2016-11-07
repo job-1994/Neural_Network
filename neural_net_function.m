@@ -10,7 +10,8 @@ function Output = neural_net_function(input, Weights, nHiddenLayers)
     end
     output_weight_layer = transpose(Weights{3});
     layer_output = tanh(layer_output * output_weight_layer);
-    Output = 100*(1+layer_output);
+    Weights{4};
+    Output = Weights{4}*(1+layer_output);
 
     %{
     layer_1_output = atan(input * weight_input_layer);
