@@ -2,7 +2,7 @@ function weights_best = GA(io_pairs, n_pairs, DIM)
 
 popsize = 200;
 lim_generations = 200;
-k_parents = 5;
+k_parents = 15;
 mutate_rate = 0.1;
 nHiddenLayers = 3;
 nNeurons = 20; 
