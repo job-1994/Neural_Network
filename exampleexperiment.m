@@ -17,7 +17,7 @@ maxrestarts = 1e4;        % SET to zero for an entirely deterministic algorithm
 
 %dimensions = [2, 3, 5, 20, 40];  % small dimensions first, for CPU reasons
 dimensions = [2];  % small dimensions first, for CPU reasons
-functions = [1];%benchmarks('FunctionIndices');  % or benchmarksnoisy(...)
+functions = [1, 2];%benchmarks('FunctionIndices');  % or benchmarksnoisy(...)
 instances = [1:5, 41:50];  % 15 function instances
 
 more off;  % in octave pagination is on by default
