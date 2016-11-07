@@ -10,6 +10,6 @@ for i = 1: pop_size
        f_nn = neural_net_function(input, weight, nHiddenLayers);
        f_total = f_total + fitness(f_desired, f_nn);
     end
-    f_array(1, i) = f_total;
+    f_array(1, i) = f_total/n_pairs;
 end 
 end
