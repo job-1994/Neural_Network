@@ -1,12 +1,14 @@
 clc
 clear
+N = 2;
+dimensions = 2;
+nHiddenLayers = 3;
+neurons = 2;
+input = [2 2];
+test = populate(N, dimensions, nHiddenLayers, neurons)
+tested = encode(test, nHiddenLayers, neurons, dimensions)
+weight = {tested{1, 1} tested{1, 2} tested{1, 3}};
 
-% %   in = -5 + (10+10)*rand(1,3)
-%     weights = populate(2,2);
-% %     encoded_weights = encode(weights, 3);
-% %     neural_out = neural_net_function(encoded_weights, in);
-% %     %fitness_value = feval('fgeneric', transpose(neural_out))
-% i = weights(1,:)
-% mutate(weights(1,:),0.1)
+neural_net = neural_net_function(input, weight, nHiddenLayers);
+display(test);
 
-test = get_test_pairs(51)

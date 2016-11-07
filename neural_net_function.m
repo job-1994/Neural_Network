@@ -1,12 +1,16 @@
-function Output = neural_net_function(input, Weights, nLayers)
-    layer_output = transpose(input);
+function Output = neural_net_function(input, Weights, nHiddenLayers)
     
-    for layer = 1: nLayers
-        weight_layer = transpose(Weights{1,layer});
-        layer_output = atan(layer_output * weight_layer);
+    input = transpose(input);
+    input_weight_layer = Weights{1};
+    
+    layer_output = tanh(input * input_weight_layer);
+    for layer = 1: nHiddenLayers
+        weight_layer = transpose(Weights{2}{layer});
+        layer_output = tanh(layer_output * weight_layer);
     end
-    
-    Output = 100*(abs(layer_output));
+    output_weight_layer = transpose(Weights{3});
+    layer_output = tanh(layer_output * output_weight_layer);
+    Output = 100*(1+layer_output);
 
     %{
     layer_1_output = atan(input * weight_input_layer);
