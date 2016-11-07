@@ -7,7 +7,7 @@ function Output = neural_net_function(input, Weights)
     layer_1_output = tanh(input * weight_input_layer);
     layer_2_output = tanh(layer_1_output * weight_1st_layer);
     Output = tanh(layer_2_output * weight_output_layer);
-    Output = 100*Output;
+    Output = 100*(Output+1);
 
     %{
     layer_1_output = atan(input * weight_input_layer);

@@ -5,11 +5,11 @@
 clear
 clc
 
-addpath('C:\Users\Job\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
-datapath = 'C:\Users\Job\Desktop\Data\Original';  % different folder for each experiment
+addpath('C:\Users\helmi\OneDrive\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
+datapath = 'C:\Users\helmi\OneDrive\Documents\GitHub\Neural_Network\Data\Test 1';  % different folder for each experiment
 % opt.inputFormat = 'row';
 opt.algName = 'Test 1';
-opt.comments = 'Test run of everything straight out of the box with 2, 3, 5 dimensions';
+opt.comments = 'Test run';
 maxfunevals = '10 * dim'; % 10*dim is a short test-experiment taking a few minutes 
                           % INCREMENT maxfunevals successively to larger value(s)
 minfunevals = 'dim + 2';  % PUT MINIMAL SENSIBLE NUMBER OF EVALUATIONS for a restart

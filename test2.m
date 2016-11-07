@@ -9,4 +9,4 @@ clear
 % i = weights(1,:)
 % mutate(weights(1,:),0.1)
 
-testihrhbke = get_test_pairs(51)
+test = get_test_pairs(51)
