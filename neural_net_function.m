@@ -1,42 +1,25 @@
 function Output = neural_net_function(input, Weights, nHiddenLayers)
-    c = 0.4;
-    d = 5;
+%Activation function per layer is a*tanh(b*previous_layer_output), the last
+%layers output is multiplied by a final weight that determines the
+%magnitude of the output value, as this differs per function.
+    a = 2;
+    b = 1;
+    
+    %Input layer
     input = transpose(input);
     input_weight_layer = Weights{1};
-    
     layer_output = tanh(input * input_weight_layer);
+    
+    %Cycles through hidden layers, as defined in the passed in parameters
     for layer = 1: nHiddenLayers
         weight_layer = transpose(Weights{2}{layer});
-        layer_output = d*tanh(c*layer_output * weight_layer);
+        layer_output = b*tanh(a*layer_output * weight_layer);
     end
+    
+    %Output layer, lastly multiplied by weight containing order of
+    %magnitude
     output_weight_layer = transpose(Weights{3});
-    layer_output = d*tanh(c*layer_output * output_weight_layer);
-    Weights{4};
-    Output = Weights{4}*(1+layer_output);
+    layer_output = b*tanh(a*layer_output * output_weight_layer);
+    Output = Weights{4}*(layer_output);
 
-    %{
-    layer_1_output = atan(input * weight_input_layer);
-    layer_2_output = atan(layer_1_output * weight_1st_layer);
-    Output = atan(layer_2_output * weight_output_layer);
-        
-    layer_1_output = ((sqrt(input * weight_input_layer).^2 + 1) -1)/2 + input * weight_input_layer;
-    layer_2_output = ((sqrt(layer_1_output * weight_1st_layer).^2 + 1) -1)/2 + layer_1_output * weight_1st_layer;
-    Output = ((sqrt(layer_2_output * weight_output_layer).^2 + 1) -1)/2 + layer_2_output * weight_output_layer;
-    
-    layer_1_output = ((sqrt(input * weight_input_layer).^2 + 1) -1)/2 + input * weight_input_layer;
-    layer_2_output = ((sqrt(layer_1_output * weight_1st_layer).^2 + 1) -1)/2 + layer_1_output * weight_1st_layer;
-    Output = ((sqrt(layer_2_output * weight_output_layer).^2 + 1) -1)/2 + layer_2_output * weight_output_layer;
-    
-    layer_1_output = (1 + exp(-(input * weight_input_layer))).^(-1);
-    layer_2_output = (1 + exp(-(layer_1_output * weight_1st_layer))).^(-1);
-    Output = (1 + exp(-(layer_2_output * weight_output_layer))).^(-1);
-    
-    layer_1_output = exp(-(input * weight_input_layer).^2);
-    layer_2_output = exp(-(layer_1_output * weight_1st_layer).^2);
-    Output = exp(-(layer_2_output * weight_output_layer).^2);
-    
-    layer_1_output = tanh(input * weight_input_layer);
-    layer_2_output = tanh(layer_1_output * weight_1st_layer);
-    Output = tanh(layer_2_output * weight_output_layer);
-    %}
 end
