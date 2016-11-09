@@ -10,11 +10,12 @@ datapath = 'C:\Users\Job\Documents\GitHub\Data';  % different folder for each ex
 %datapath = 'C:\Users\helmi\OneDrive\Documents\GitHub\Neural_Network\Data\Test 1';  % different folder for each experiment
 % opt.inputFormat = 'row';
 opt.algName = 'Test 1';
+
 opt.comments = 'Test run';
 maxfunevals = '10 * dim'; % 10*dim is a short test-experiment taking a few minutes 
                           % INCREMENT maxfunevals successively to larger value(s)
 minfunevals = 'dim + 2';  % PUT MINIMAL SENSIBLE NUMBER OF EVALUATIONS for a restart
-maxrestarts = 1e4;        % SET to zero for an entirely deterministic algorithm
+maxrestarts = 2;        % SET to zero for an entirely deterministic algorithm
 
 %dimensions = [2, 3, 5, 20, 40];  % small dimensions first, for CPU reasons
 dimensions = [2];  % small dimensions first, for CPU reasons
