@@ -1,21 +1,25 @@
 function weights_best = Genetic_Algorithm(io_pairs, n_pairs, DIM)
 
-popsize = 200;
+init_popsize = 10000;
 lim_generations = 100;
 k_parents = 15;
 mutate_rate = 0.005;
 nHiddenLayers = 2;
-nNeurons = 5;
+nNeurons = 10;
 variance = 1;
+popsize = 200;
+prune_size = popsize/init_popsize;
 
 %create initial generation
-pop = populate(popsize, DIM, nHiddenLayers, nNeurons);
+pop = populate(init_popsize, DIM, nHiddenLayers, nNeurons);
 weights = encode(pop, nHiddenLayers, nNeurons, DIM);
 
-generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs, nHiddenLayers);
+generation_fitness = evaluate_generation(init_popsize, weights, n_pairs, io_pairs, nHiddenLayers);
 
+%Prune the initial generation down to secondary popsize
+[pruned_gen, new_fitness] = prune_generation(pop, generation_fitness, true(), prune_size, 0);
 %produce next generation through tournament selection using crossover
-next_generation = tournament(generation_fitness, pop, k_parents, popsize);
+next_generation = tournament(new_fitness, pruned_gen, k_parents, popsize);
 next_generation = mutate(next_generation, mutate_rate, variance);
 
 fbest = inf;  

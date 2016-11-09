@@ -1,11 +1,11 @@
 clc
 clear
-N = 2;
-dimensions = 2;
+pop_size = 2;
+dimensions = 4;
 nHiddenLayers = 2;
 neurons = 2;
 input = -5 + (5 + 5)*rand(dimensions,1);
-test = populate(N, dimensions, nHiddenLayers, neurons);
+test = populate(pop_size, dimensions, nHiddenLayers, neurons);
 tested = encode(test, nHiddenLayers, neurons, dimensions);
 weight = {tested{1, 1} tested{1, 2} tested{1, 3} tested{1, 4}};
 
