@@ -20,33 +20,22 @@ for iter = 1 : maxfunevals
     input_test = -5 + (5+5)*rand(DIM,1);   
     desired_test_value = feval(FUN,input_test);
     input_test = transpose(input_test);
-    real_test_value = neural_net_function(transpose(input_test), weight_best, 1);
+    real_test_value = neural_net_function(transpose(input_test), weight_best, 2);
     comparison_matrix(1,iter) = desired_test_value;
     comparison_matrix(2,iter) = real_test_value;
     if(fbest > real_test_value)
        fbest =  real_test_value;
     end
-    if feval(FUN, 'fbest') < ftarget
+    if fbest < ftarget
         disp('BREAK WAS REACHED');
         break;
     end
 end
         disp('   real      target');
-        x = [feval(FUN, 'fbest'), ftarget];
+        x = [fbest, ftarget];
         disp(x);
-%  for iter = 1:ceil(maxfunevals/popsize)
-%    xpop = 10 * rand(DIM, popsize) - 5;      % new solutions
-%    [fvalues, idx] = sort(feval(FUN, xpop)); % evaluate
-
-    
-    
-%    if fbest > fvalues(1)                    % keep best
-%     fbest = fvalues(1);
-%     xbest = xpop(:,1);
-%    end
-%    if feval(FUN, 'fbest') < ftarget         % COCO-task achieved
-%      break;                                 % (works also for noisy functions)
-%    end
+%         x_bar = [feval(FUN, 'fbest') ftarget;];
+%         y = bar(x);
   end 
 
   

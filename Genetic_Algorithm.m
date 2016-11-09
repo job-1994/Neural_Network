@@ -1,11 +1,12 @@
-function weights_best = GA(io_pairs, n_pairs, DIM)
+function weights_best = Genetic_Algorithm(io_pairs, n_pairs, DIM)
 
 popsize = 200;
 lim_generations = 100;
 k_parents = 15;
 mutate_rate = 0.005;
-nHiddenLayers = 1;
-nNeurons = 5; 
+nHiddenLayers = 2;
+nNeurons = 5;
+variance = 1;
 
 %create initial generation
 pop = populate(popsize, DIM, nHiddenLayers, nNeurons);
@@ -15,14 +16,9 @@ generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs, nH
 
 %produce next generation through tournament selection using crossover
 next_generation = tournament(generation_fitness, pop, k_parents, popsize);
-next_generation = mutate(next_generation, mutate_rate);
+next_generation = mutate(next_generation, mutate_rate, variance);
 
-fbest = inf;
-a = animatedline;
-clearpoints(a);
-title('Best Fitness');
-xlabel('Generations');
-ylabel('f best');  
+fbest = inf;  
 
 for generations = 1 : lim_generations
     weights = encode(next_generation, nHiddenLayers, nNeurons, DIM);
@@ -37,9 +33,8 @@ for generations = 1 : lim_generations
     end
 
     next_generation = tournament(generation_fitness, pop, k_parents, popsize);
-    next_generation = mutate(next_generation, mutate_rate);
+    next_generation = mutate(next_generation, mutate_rate, variance);
 %     display(generations);
-    addpoints(a, generations, fbest);
 end
 
     error = zeros(1,n_pairs);
@@ -50,16 +45,16 @@ end
        error(1,j) = ((f_desired(1,j) - f_nn(1,j))/f_desired(1,j))*100;
     end
     
-    subplot(2,1,1)
-    b = bar(f_desired);
-    title('Neural Network Desired Ouput');
-    xlabel('I/O pair');
-    ylabel('Output');
-    
-    subplot(2,1,2)
-    c = bar(f_nn);
-    title('Neural Network Real Output');
-    xlabel('I/O Pair');
-    ylabel('Output');
+%     subplot(2,1,1)
+%     b = bar(f_desired);
+%     title('Neural Network Desired Ouput');
+%     xlabel('I/O pair');
+%     ylabel('Output');
+%     
+%     subplot(2,1,2)
+%     c = bar(f_nn);
+%     title('Neural Network Real Output');
+%     xlabel('I/O Pair');
+%     ylabel('Output');
 
 end
