@@ -2,13 +2,15 @@ function weights_best_l = Genetic_Algorithm(io_pairs, n_pairs, DIM)
 
 init_popsize = 2000;
 lim_generations = 100;
-k_parents = 150;
+k_parents = 15;
 mutate_rate = 0.005;
 nHiddenLayers = 2;
 nNeurons = 2;
 variance = 1;
 popsize = 200;
-prune_size = popsize/init_popsize;
+initial_keep_size = popsize/init_popsize;
+keep_size = 0.99;
+prune_limit = 100;
 
 %create initial generation
 pop = populate(init_popsize, DIM, nHiddenLayers, nNeurons);
@@ -17,17 +19,21 @@ weights = encode(pop, nHiddenLayers, nNeurons, DIM);
 generation_fitness = evaluate_generation(init_popsize, weights, n_pairs, io_pairs, nHiddenLayers);
 
 %Prune the initial generation down to secondary popsize
-[pruned_gen, new_fitness] = prune_generation(pop, generation_fitness, true(), prune_size, 0);
+[pruned_gen, new_fitness] = prune_generation(pop, generation_fitness, initial_keep_size);
 
 %produce next generation through tournament selection using crossover
 next_generation = tournament(new_fitness, pruned_gen, k_parents, popsize);
 next_generation = mutate(next_generation, mutate_rate, variance);
-
+current_popsize = size(next_generation, 1);
 fbest = inf;  
 
 for generations = 1 : lim_generations
     weights = encode(next_generation, nHiddenLayers, nNeurons, DIM);
-    generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs, nHiddenLayers);
+    generation_fitness = evaluate_generation(current_popsize, weights, n_pairs, io_pairs, nHiddenLayers);
+    if size(next_generation, 1) > prune_limit
+        [next_generation, generation_fitness] = prune_generation(next_generation, generation_fitness, keep_size);
+    end
+    current_popsize = size(next_generation, 1);
     gene_length = size(next_generation);
     combined = [next_generation transpose(generation_fitness)];
     combined = sortrows(combined, gene_length(2)+1);
@@ -37,7 +43,7 @@ for generations = 1 : lim_generations
         weights_best = combined(1, 1 : gene_length(2));
     end
 
-    next_generation = tournament(generation_fitness, pop, k_parents, popsize);
+    next_generation = tournament(generation_fitness, pop, k_parents, current_popsize);
     next_generation = mutate(next_generation, mutate_rate, variance);
     display(generations);
 end
