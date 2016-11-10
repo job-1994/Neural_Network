@@ -11,9 +11,9 @@ datapath = 'C:\Users\Helmi\Documents\GitHub\Neural_Network\Data\Desktop test 3';
 % addpath('C:\Users\helmi\OneDrive\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
 % datapath = 'C:\Users\helmi\OneDrive\Documents\GitHub\Neural_Network\Data\Test 1';  % different folder for each experiment
 % % opt.inputFormat = 'row';
-opt.algName = 'Test 1';
+opt.algName = 'Desktop test';
 
-opt.comments = 'Test run';
+opt.comments = 'Experiment';
 maxfunevals = '10 * dim'; % 10*dim is a short test-experiment taking a few minutes 
                           % INCREMENT maxfunevals successively to larger value(s)
 minfunevals = 'dim + 2';  % PUT MINIMAL SENSIBLE NUMBER OF EVALUATIONS for a restart

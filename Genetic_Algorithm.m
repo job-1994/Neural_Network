@@ -34,9 +34,9 @@ for generations = 1 : lim_generations
     if size(next_generation,1) > prune_limit
     [next_generation, generation_fitness] = prune_generation(next_generation, generation_fitness, keep_size);
     end
-    
-    display(generations);
-    display(size(next_generation,1));    
+%     
+%     display(generations);
+%     display(size(next_generation,1));    
 
     current_popsize = size(next_generation,1);
     
