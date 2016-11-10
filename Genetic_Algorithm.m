@@ -52,6 +52,7 @@ fbest = inf;
        error(1,j) = ((f_desired(1,j) - f_nn(1,j))/f_desired(1,j))*100;
     end
     fitness_total = fitness_total/n_pairs;
+    
 %     subplot(2,1,1)
 %     b = bar(f_desired);
 %     title('Neural Network Desired Ouput');
