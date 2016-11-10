@@ -1,11 +1,11 @@
 function weights_best_l = Genetic_Algorithm(io_pairs, n_pairs, DIM)
 
-init_popsize = 10000;
+init_popsize = 2000;
 lim_generations = 100;
 k_parents = 150;
 mutate_rate = 0.005;
 nHiddenLayers = 2;
-nNeurons = 2;
+nNeurons = 5;
 variance = 1;
 popsize = 200;
 prune_size = popsize/init_popsize;
