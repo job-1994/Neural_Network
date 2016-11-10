@@ -6,7 +6,7 @@
 %same index as the original chromosome.
 
 
-function f_array = evaluate_generation(pop_size, weights, n_pairs, io_pairs, nHiddenLayers)
+function fit= evaluate_generation(pop_size, weights, n_pairs, io_pairs, nHiddenLayers)
 
 %Create matrix of zeros, the size of the population to retain proper
 %index's
@@ -16,12 +16,14 @@ f_array = zeros(1, pop_size);
 for i = 1: pop_size
     weight = {weights{i, 1} weights{i, 2} weights{i, 3} weights{i, 4}};
     f_total = 0;
+    desired_value = zeros(1, n_pairs);
+    nn_value = zeros(1, n_pairs);
+    desired_value(1,:) = io_pairs{2}(1, :);
     for j = 1 : n_pairs
        input =  io_pairs {1}{j};
-       f_desired = io_pairs{2}(1, j);
-       f_nn = neural_net_function(input, weight, nHiddenLayers);
-       f_total = f_total + fitness(f_desired, f_nn);
+       nn_value(1,j) = neural_net_function(input, weight, nHiddenLayers);
     end
-    f_array(1, i) = f_total/n_pairs;
+    fit(1, i) = fitness(desired_value, nn_value);
+%     f_array(1, i) = f_total/n_pairs;
 end 
 end

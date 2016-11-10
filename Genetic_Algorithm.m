@@ -5,7 +5,7 @@ lim_generations = 100;
 k_parents = 150;
 mutate_rate = 0.005;
 nHiddenLayers = 2;
-nNeurons = 5;
+nNeurons = 2;
 variance = 1;
 popsize = 200;
 prune_size = popsize/init_popsize;
@@ -25,7 +25,7 @@ next_generation = mutate(next_generation, mutate_rate, variance);
 
 fbest = inf;  
 
-% for generations = 1 : lim_generations
+for generations = 1 : lim_generations
     weights = encode(next_generation, nHiddenLayers, nNeurons, DIM);
     generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs, nHiddenLayers);
     gene_length = size(next_generation);
@@ -39,8 +39,8 @@ fbest = inf;
 
     next_generation = tournament(generation_fitness, pop, k_parents, popsize);
     next_generation = mutate(next_generation, mutate_rate, variance);
-%     display(generations);
-% end
+    display(generations);
+end
 
     weights_best_l = encode(weights_best, nHiddenLayers, nNeurons, DIM);
     fitness_total = 0;

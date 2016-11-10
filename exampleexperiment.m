@@ -4,10 +4,10 @@
 % CAPITALIZATION indicates code adaptations to be made
 clear
 clc
-addpath('C:\Users\Helmi\Documents\GitHub\Neural_Network');
-datapath = ('C:\Users\Helmi\Documents\GitHub\Neural_Network\Data\Desktop test 2');
-% addpath('C:\Users\Job\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
-% datapath = 'C:\Users\Job\Documents\GitHub\Data\New';  % different folder for each experiment
+% addpath('C:\Users\Helmi\Documents\GitHub\Neural_Network');
+% datapath = ('C:\Users\Helmi\Documents\GitHub\Neural_Network\Data\Desktop test 2');
+addpath('C:\Users\Job\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
+datapath = 'C:\Users\Job\Documents\GitHub\Data\New';  % different folder for each experiment
 %addpath('C:\Users\helmi\OneDrive\Documents\GitHub\Neural_Network');  % should point to fgeneric.m etc.
 %datapath = 'C:\Users\helmi\OneDrive\Documents\GitHub\Neural_Network\Data\Test 1';  % different folder for each experiment
 % opt.inputFormat = 'row';
