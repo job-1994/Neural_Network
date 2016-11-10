@@ -1,11 +1,11 @@
-function weights_best = Genetic_Algorithm(io_pairs, n_pairs, DIM)
+function weights_best_l = Genetic_Algorithm(io_pairs, n_pairs, DIM)
 
 init_popsize = 10000;
 lim_generations = 100;
-k_parents = 15;
+k_parents = 150;
 mutate_rate = 0.005;
 nHiddenLayers = 2;
-nNeurons = 10;
+nNeurons = 2;
 variance = 1;
 popsize = 200;
 prune_size = popsize/init_popsize;
@@ -18,37 +18,40 @@ generation_fitness = evaluate_generation(init_popsize, weights, n_pairs, io_pair
 
 %Prune the initial generation down to secondary popsize
 [pruned_gen, new_fitness] = prune_generation(pop, generation_fitness, true(), prune_size, 0);
+
 %produce next generation through tournament selection using crossover
 next_generation = tournament(new_fitness, pruned_gen, k_parents, popsize);
 next_generation = mutate(next_generation, mutate_rate, variance);
 
 fbest = inf;  
 
-for generations = 1 : lim_generations
+% for generations = 1 : lim_generations
     weights = encode(next_generation, nHiddenLayers, nNeurons, DIM);
     generation_fitness = evaluate_generation(popsize, weights, n_pairs, io_pairs, nHiddenLayers);
-
-    for i = 1 : popsize
-        if(generation_fitness(1,i) < fbest)
-            fbest =  generation_fitness(1,i);
-            idx = find(generation_fitness == fbest);
-            weights_best = {weights{idx, 1} weights{idx, 2} weights{idx, 3} weights{idx, 4}};
-        end
+    gene_length = size(next_generation);
+    combined = [next_generation transpose(generation_fitness)];
+    combined = sortrows(combined, gene_length(2)+1);
+    
+    if(combined(1,gene_length(2) + 1) < fbest)
+        fbest =  combined(1,gene_length(2) + 1);
+        weights_best = combined(1, 1 : gene_length(2));
     end
 
     next_generation = tournament(generation_fitness, pop, k_parents, popsize);
     next_generation = mutate(next_generation, mutate_rate, variance);
 %     display(generations);
-end
+% end
 
-    error = zeros(1,n_pairs);
+    weights_best_l = encode(weights_best, nHiddenLayers, nNeurons, DIM);
+    fitness_total = 0;
     for j = 1 : n_pairs
        input =  io_pairs {1}{j};
        f_desired(1,j) = io_pairs{2}(1, j);
-       f_nn(1,j) = neural_net_function(input, weights_best, nHiddenLayers);
+       f_nn(1,j) = neural_net_function(input, weights_best_l, nHiddenLayers);
+       fitness_total = fitness_total + fitness(f_desired(1,j), f_nn(1,j));
        error(1,j) = ((f_desired(1,j) - f_nn(1,j))/f_desired(1,j))*100;
     end
-    
+    fitness_total = fitness_total/n_pairs;
 %     subplot(2,1,1)
 %     b = bar(f_desired);
 %     title('Neural Network Desired Ouput');
