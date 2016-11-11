@@ -1,10 +1,8 @@
-
 %The evaluate generation function uses the test data from the COCO function
 %and applies the populations chromosome weights to the neural network,
 %generating values to compare to the desired output. The fitness is
 %calculated per i/o pair and summed, then returned in an array with the
 %same index as the original chromosome.
-
 
 function fit= evaluate_generation(pop_size, weights, n_pairs, io_pairs, nHiddenLayers)
 

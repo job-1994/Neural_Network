@@ -30,6 +30,7 @@ fbest = inf;
 for generations = 1 : lim_generations
     weights = encode(next_generation, nHiddenLayers, nNeurons, DIM);
     generation_fitness = evaluate_generation(current_popsize, weights, n_pairs, io_pairs, nHiddenLayers);
+    
     if size(next_generation, 1) > prune_limit
         [next_generation, generation_fitness] = prune_generation(next_generation, generation_fitness, keep_size);
     end
