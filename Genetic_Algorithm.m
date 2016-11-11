@@ -42,7 +42,8 @@ for generations = 1 : lim_generations
         fbest =  combined(1,gene_length(2) + 1);
         weights_best = combined(1, 1 : gene_length(2));
     end
-
+    line_matrix(generations,1) = generations;
+    line_matrix(generations,2) = fbest;
     next_generation = tournament(generation_fitness, pop, k_parents, current_popsize);
     next_generation = mutate(next_generation, mutate_rate, variance);
 %     display(generations);
@@ -59,16 +60,25 @@ end
     end
     fitness_total = fitness_total/n_pairs;
     
-%     subplot(2,1,1)
-%     b = bar(f_desired);
-%     title('Neural Network Desired Ouput');
-%     xlabel('I/O pair');
-%     ylabel('Output');
-%     
-%     subplot(2,1,2)
-%     c = bar(f_nn);
-%     title('Neural Network Real Output');
-%     xlabel('I/O Pair');
-%     ylabel('Output');
+    for iter = 1 : size(f_desired, 2)
+    graph_matrix(iter, 1) = f_desired(iter);
+    graph_matrix(iter, 2) = f_nn(iter);
+    end
+    
+    
+    subplot(2,1,1)
+    b = bar(graph_matrix);
+    title('Neural Network Desired Ouput');
+    xlabel('I/O pair');
+    ylabel('Output');
+    legend('FUN Test Output', 'Neural Net Ouput');
+    
+    subplot(2,1,2)
+    line_x = line_matrix(:,1);
+    line_y = line_matrix(:,2);
+    c = plot(line_x, line_y, '-o');
+    title('Fitness vs Generations');
+    xlabel('Generations');
+    ylabel('Fitness evaluation');
 
 end
