@@ -20,7 +20,7 @@ minfunevals = 'dim + 2';  % PUT MINIMAL SENSIBLE NUMBER OF EVALUATIONS for a res
 maxrestarts = 2;        % SET to zero for an entirely deterministic algorithm
 
 dimensions = [2, 3, 5, 20, 40];  % small dimensions first, for CPU reasons
-functions = [benchmarks('FunctionIndices')];
+functions = [23];%[benchmarks('FunctionIndices')];
 instances = [1:5, 41:50];  % 15 function instances
 
 more off;  % in octave pagination is on by default

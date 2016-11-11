@@ -23,16 +23,33 @@ for iter = 1 : maxfunevals
     input_test = transpose(input_test);
     real_test_value = neural_net_function(transpose(input_test), weight_best, 2);
     output(2,iter) = real_test_value;
-    comparison_matrix(1,iter) = desired_test_value;
-    comparison_matrix(2,iter) = real_test_value;
+    comparison_matrix(iter,1) = desired_test_value;
+    comparison_matrix(iter,2) = real_test_value;
     if(fbest > real_test_value)
         fbest =  real_test_value;
     end
-    if fbest < ftarget
-        break;
-    end
+%     if fbest < ftarget
+%         break;
+%     end
+end
+% figure
+% d = bar(comparison_matrix);
+
+input_l = [-5:0.25:5];
+for iter = 1: size(input_l, 2)
+    input_p(1, 1) = input_l(1, iter);
+    input_p(2, 1) = input_l(1, iter);
+    
+    out(1, iter) = feval(FUN,input_p);
+    out_nn(1, iter) = neural_net_function(input_p, weight_best, 2);
 end
 
+figure
+subplot(2,1,1)
+sc = scatter3(input_l, input_l, out);
+subplot(2,1,2)
+scd = scatter3(input_l, input_l, out_nn)
+rotate3d on
 end
 
 
