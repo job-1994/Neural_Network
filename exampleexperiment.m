@@ -19,11 +19,9 @@ maxfunevals = '10 * dim'; % 10*dim is a short test-experiment taking a few minut
 minfunevals = 'dim + 2';  % PUT MINIMAL SENSIBLE NUMBER OF EVALUATIONS for a restart
 maxrestarts = 2;        % SET to zero for an entirely deterministic algorithm
 
-%dimensions = [2, 3, 5, 20, 40];  % small dimensions first, for CPU reasons
-dimensions = [2];  % small dimensions first, for CPU reasons
-functions = [5, 15, 22];%[benchmarks('FunctionIndices')];
-instances = [1, 45]; %[1:5, 41:50];  % 15 function instances
-% instances = [2];
+dimensions = [2, 3, 5, 20, 40];  % small dimensions first, for CPU reasons
+functions = [benchmarks('FunctionIndices')];
+instances = [1:5, 41:50];  % 15 function instances
 
 more off;  % in octave pagination is on by default
 

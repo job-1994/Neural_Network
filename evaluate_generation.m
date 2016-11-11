@@ -8,20 +8,18 @@ function fit= evaluate_generation(pop_size, weights, n_pairs, io_pairs, nHiddenL
 
 %Create matrix of zeros, the size of the population to retain proper
 %index's
-f_array = zeros(1, pop_size);
+fit = zeros(1, pop_size);
 
-%Cycle through population, obtain the weights, 
+%Cycle through population, obtain the weights,
 for i = 1: pop_size
     weight = {weights{i, 1} weights{i, 2} weights{i, 3} weights{i, 4}};
-    f_total = 0;
     desired_value = zeros(1, n_pairs);
     nn_value = zeros(1, n_pairs);
     desired_value(1,:) = io_pairs{2}(1, :);
     for j = 1 : n_pairs
-       input =  io_pairs {1}{j};
-       nn_value(1,j) = neural_net_function(input, weight, nHiddenLayers);
+        input =  io_pairs {1}{j};
+        nn_value(1,j) = neural_net_function(input, weight, nHiddenLayers);
     end
     fit(1, i) = fitness(desired_value, nn_value);
-%     f_array(1, i) = f_total/n_pairs;
-end 
+end
 end

@@ -1,3 +1,4 @@
+
 function weights_best_l = Genetic_Algorithm(io_pairs, n_pairs, DIM)
 
 init_popsize = 200;
@@ -21,12 +22,20 @@ generation_fitness = evaluate_generation(init_popsize, weights, n_pairs, io_pair
 %Prune the initial generation down to secondary popsize
 [pruned_gen, new_fitness] = prune_generation(pop, generation_fitness, initial_keep_size);
 
-%produce next generation through tournament selection using crossover
+%produce next generation through tournament selection using crossover and
+%mutation
 next_generation = tournament(new_fitness, pruned_gen, k_parents, popsize);
 next_generation = mutate(next_generation, mutate_rate, variance);
-current_popsize = size(next_generation, 1);
-fbest = inf;  
 
+current_popsize = size(next_generation, 1);
+fbest = inf;
+
+%Untill generation limit is reached, keep evaluating weights for the neural
+%network, and using crossover/mutate to find the best solution as an
+%approximation to the FUN. The best weight found across all generations is
+%stored. Prune the size of the population till minimum is reached. Gather
+%data for the Line_Matrix plot to show the discovery of better fitnesses
+%versus discovery generation.
 for generations = 1 : lim_generations
     weights = encode(next_generation, nHiddenLayers, nNeurons, DIM);
     generation_fitness = evaluate_generation(current_popsize, weights, n_pairs, io_pairs, nHiddenLayers);
@@ -45,41 +54,43 @@ for generations = 1 : lim_generations
     end
     line_matrix(generations,1) = generations;
     line_matrix(generations,2) = fbest;
+    
     next_generation = tournament(generation_fitness, pop, k_parents, current_popsize);
     next_generation = mutate(next_generation, mutate_rate, variance);
-%     display(generations);
 end
 
-    weights_best_l = encode(weights_best, nHiddenLayers, nNeurons, DIM);
-    fitness_total = 0;
-    for j = 1 : n_pairs
-       input =  io_pairs {1}{j};
-       f_desired(1,j) = io_pairs{2}(1, j);
-       f_nn(1,j) = neural_net_function(input, weights_best_l, nHiddenLayers);
-       fitness_total = fitness_total + fitness(f_desired(1,j), f_nn(1,j));
-       error(1,j) = ((f_desired(1,j) - f_nn(1,j))/f_desired(1,j))*100;
-    end
-    fitness_total = fitness_total/n_pairs;
-    
-    for iter = 1 : size(f_desired, 2)
+
+%For visualization purposes, re-enter the best weights to the Neural
+%Network and compare against the desired output, to visualize how well the neural
+%net has been trained under the training data
+weights_best_l = encode(weights_best, nHiddenLayers, nNeurons, DIM);
+f_desired = zeros(1,n_pairs);
+f_nn = zeros(1, n_pairs);
+for j = 1 : n_pairs
+    input =  io_pairs {1}{j};
+    f_desired(1,j) = io_pairs{2}(1, j);
+    f_nn(1,j) = neural_net_function(input, weights_best_l, nHiddenLayers);
+end
+for iter = 1 : size(f_desired, 2)
     graph_matrix(iter, 1) = f_desired(iter);
     graph_matrix(iter, 2) = f_nn(iter);
-    end
-    
-    
-    subplot(2,1,1)
-    b = bar(graph_matrix);
-    title('Neural Network Desired Ouput');
-    xlabel('I/O pair');
-    ylabel('Output');
-    legend('FUN Test Output', 'Neural Net Ouput');
-    
-    subplot(2,1,2)
-    line_x = line_matrix(:,1);
-    line_y = line_matrix(:,2);
-    c = plot(line_x, line_y, '-o');
-    title('Fitness vs Generations');
-    xlabel('Generations');
-    ylabel('Fitness evaluation');
+end
+
+%Create Graphs for comparison of desired versus real output, and best
+%weights versus generation
+subplot(2,1,1)
+b = bar(graph_matrix);
+title('Neural Network Desired Ouput');
+xlabel('I/O pair');
+ylabel('Output');
+legend('FUN Test Output', 'Neural Net Ouput');
+
+subplot(2,1,2)
+line_x = line_matrix(:,1);
+line_y = line_matrix(:,2);
+c = plot(line_x, line_y, '-o');
+title('Fitness vs Generations');
+xlabel('Generations');
+ylabel('Fitness evaluation');
 
 end
