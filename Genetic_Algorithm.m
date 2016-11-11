@@ -1,8 +1,8 @@
 function weights_best_l = Genetic_Algorithm(io_pairs, n_pairs, DIM)
 
-init_popsize = 2000;
+init_popsize = 200;
 lim_generations = 100;
-k_parents = 15;
+k_parents = 10;
 mutate_rate = 0.005;
 nHiddenLayers = 2;
 nNeurons = 2;
@@ -45,7 +45,7 @@ for generations = 1 : lim_generations
 
     next_generation = tournament(generation_fitness, pop, k_parents, current_popsize);
     next_generation = mutate(next_generation, mutate_rate, variance);
-    display(generations);
+%     display(generations);
 end
 
     weights_best_l = encode(weights_best, nHiddenLayers, nNeurons, DIM);
