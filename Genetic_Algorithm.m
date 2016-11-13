@@ -1,8 +1,9 @@
-
+%This is the main evolutionary algorithm, which evolves the weights till it
+%matches the selected COCO FUN.
 function weights_best_l = Genetic_Algorithm(io_pairs, n_pairs, DIM)
 
 init_popsize = 200;
-lim_generations = 100;
+lim_generations = 200;
 k_parents = 10;
 mutate_rate = 0.005;
 nHiddenLayers = 2;

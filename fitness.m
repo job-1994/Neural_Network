@@ -27,7 +27,7 @@ end
 
 f = within/(within + outwith);
 if f == 0
-    f = 1;
+    f = 0.01;
 end
 f = difference_total*f;
 end

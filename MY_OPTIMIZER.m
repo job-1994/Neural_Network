@@ -47,8 +47,11 @@ end
 figure
 subplot(2,1,1)
 sc = scatter3(input_l, input_l, out);
+title('COCO FUN output');
+
 subplot(2,1,2)
 scd = scatter3(input_l, input_l, out_nn)
+title('Approximated FUN output through Neural Network');
 rotate3d on
 end
 
