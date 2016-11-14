@@ -1,0 +1,12 @@
+init_popsize = 200;
+lim_generations = 100;
+k_parents = 15;
+mutate_rate = 0.005;
+nHiddenLayers = 2;
+nNeurons = 2;
+variance = 1;
+popsize = 200;
+initial_keep_size = popsize/init_popsize;
+keep_size = 0.99;
+prune_limit = variable;
+error_margin = 0.1;
